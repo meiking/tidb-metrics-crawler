@@ -31,7 +31,7 @@ func main() {
 
 	// Parse time range
 	if *st != "" {
-		startTime, err = time.Parse(time.RFC3339, cfg.TimeRange.Start)
+		startTime, err = time.Parse(time.RFC3339, *st)
 		if err != nil {
 			log.Fatalf("Invalid start time format: %v", err)
 		}
