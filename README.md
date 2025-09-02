@@ -1,3 +1,6 @@
+# About this project 
+This project is used to batch scrape Prometheus metrics and implements multiple saving methods.
+
 ## Usage
 ```
 Usage of ./tidb-metrics-crawler-linux-amd64:
@@ -59,4 +62,10 @@ sink:
     receive_id: "user_id_or_chat_id"
     receive_id_type: "user_id" # Can be "user_id", "chat_id", "open_id"
     message_title: "TiDB Metrics Report"
+  mysql:
+    dsn: "user:password@tcp(localhost:3306)/dbname"
+    table: "prometheus_metrics"
+    batchSize: 1000
+    createTable: true
+    truncateTable: false
 ```
