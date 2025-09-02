@@ -14,6 +14,15 @@ type Config struct {
 	Sink                SinkConfig         `yaml:"sink"`
 }
 
+// MySQLConfig contains configuration for MySQL sink
+type MySQLConfig struct {
+	DSN           string `yaml:"dsn"`           // Data source name (username:password@tcp(host:port)/dbname)
+	Table         string `yaml:"table"`         // Table name to store metrics (default: prometheus_metrics)
+	BatchSize     int    `yaml:"batchSize"`     // Batch size for inserts (default: 1000)
+	CreateTable   bool   `yaml:"createTable"`   // Whether to create table if it doesn't exist
+	TruncateTable bool   `yaml:"truncateTable"` // Whether to truncate table before insertion
+}
+
 // PrometheusConfig contains configuration for a Prometheus instance
 type PrometheusConfig struct {
 	Name     string `yaml:"name"`
@@ -42,6 +51,7 @@ type SinkConfig struct {
 	Type   string       `yaml:"type"`
 	CSV    CSVConfig    `yaml:"csv,omitempty"`
 	Feishu FeishuConfig `yaml:"feishu,omitempty"`
+	MySQL  MySQLConfig  `yaml:"mysql,omitempty"`
 }
 
 // CSVConfig contains configuration for CSV sink

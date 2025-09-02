@@ -13,6 +13,8 @@ func NewSink(cfg config.SinkConfig) (Sink, error) {
 		return NewCSVSink(cfg.CSV)
 	case "feishu":
 		return NewFeishuSink(cfg.Feishu)
+	case "mysql":
+		return NewMySQLSink(cfg.MySQL)
 	default:
 		return nil, fmt.Errorf("unsupported sink type: %s", cfg.Type)
 	}
