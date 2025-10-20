@@ -19,6 +19,7 @@ func main() {
 	st := flag.String("start", "", "Start time in RFC3339 format (overrides config)")
 	et := flag.String("end", "", "End time in RFC3339 format (overrides config)")
 	step := flag.String("step", "", "Step interval (overrides config)")
+	instance := flag.String("instance", "", "Prometheus instance name to use (overrides config)")
 	flag.Parse()
 
 	// Load and parse configuration
@@ -56,6 +57,15 @@ func main() {
 
 	if *step != "" {
 		cfg.TimeRange.Step = *step
+	}
+
+	// Override Prometheus instance if specified
+	if *instance != "" {
+		for _, inst := range cfg.PrometheusInstances {
+			inst.Name = *instance
+			cfg.PrometheusInstances = []config.PrometheusConfig{inst}
+			break
+		}
 	}
 
 	if *promAddrs != "" {
